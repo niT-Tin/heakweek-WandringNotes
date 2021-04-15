@@ -6,7 +6,7 @@ import com.aliyun.oss.model.ObjectListing;
 import com.travelsnotes.pojo.OSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import sun.misc.BASE64Decoder;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +42,7 @@ public class OSSutil {
     public boolean setAvatar(String base64Data, int id) throws IOException {
         try {
             ossClient = new OSSClientBuilder().build(ossProperties.getEndpoint(), ossProperties.getKeyid(), ossProperties.getKeysecret());
-
-
+            System.out.println(base64Data);
             String imgFilePath = "/Avatar/";
             String dataPrix = ""; //base64格式前头
             String data = "";//实体部分数据
@@ -75,7 +74,7 @@ public class OSSutil {
                 return false;
             }
 
-            sun.misc.BASE64Decoder decoder = new sun.misc.BASE64Decoder();
+            BASE64Decoder decoder = new BASE64Decoder();
             try {
                 //Base64解码
                 byte[] b = decoder.decodeBuffer(data);
@@ -89,8 +88,12 @@ public class OSSutil {
                 out.write(b);
                 out.flush();
                 out.close();
+                File file = new File(imgFilePath + id + suffix);
                 InputStream inputStream = new FileInputStream(imgFilePath + id + suffix);
                 ossClient.putObject(ossProperties.getHeadPicbucket(), id + suffix, inputStream);
+                if(file.exists())
+                    if(file.isFile())
+                        file.delete();
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();

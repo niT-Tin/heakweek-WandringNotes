@@ -2,6 +2,7 @@ package com.travelsnotes.controller;
 
 
 import com.travelsnotes.dao.HKMapper;
+import com.travelsnotes.pojo.OSS;
 import com.travelsnotes.pojo.UserInfo;
 import com.travelsnotes.service.OSSutil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class UserInfoController {
 
     @Autowired
     private HKMapper userProperties;
+
 
     @Autowired
     private OSSutil ossProperties;
@@ -40,7 +42,7 @@ public class UserInfoController {
         try{
             userProperties.setUsername(phoneNumber, tempId);
             userProperties.setPhoneNumber(userName, tempId);
-            userProperties.setAvatar(avatarUrl, tempId);
+//            ossProperties.setAvatar(avatarUrl, tempId);
         }catch(Exception e){
             map.put("status", "400");
             return map;
