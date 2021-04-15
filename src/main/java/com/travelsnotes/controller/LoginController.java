@@ -31,7 +31,6 @@ public class LoginController {
                                      @RequestParam(value = "userPassword")String password, HttpServletRequest request){
         try {
             UserInfo user = userService.queryByName(userName);
-//            System.out.println(user);
             Map<String, String> map = new HashMap<>();
             if (user != null && user.getUserPassword().equals(password)) {
                 String token = UUID.randomUUID().toString();

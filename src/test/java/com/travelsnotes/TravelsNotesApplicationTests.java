@@ -33,15 +33,17 @@ class TravelsNotesApplicationTests {
     }
     @Test
     void articleTest(){
-        Article article1=new Article("新云","记录美好时刻",1,"c:/picture",new Date(),6);
-        articleService.addArticle(article1);
-        //System.out.println(articleService.getById(article1.getArticleId()));
-        System.out.println(article1);
-        List<Article> list = articleService.listArticle(2);
-        for (Article article : list) {
-            System.out.println(article);
+        for (int i = 0; i < 40; i++) {
+            Article article1 = new Article("新云"+i, "记录美好时刻", 1, "c:/picture", new Date(), 6);
+            articleService.addArticle(article1);
+            //System.out.println(articleService.getById(article1.getArticleId()));
+            System.out.println(article1);
         }
-        System.out.println(article1);
+//        List<Article> list = articleService.listArticle(2);
+//        for (Article article : list) {
+//            System.out.println(article);
+//        }
+//        System.out.println(article1);
        // articleService.deleteById(article1.getArticleId());
     }
 

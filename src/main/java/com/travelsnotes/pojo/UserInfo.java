@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserInfo {
-    public UserInfo(String userName, String password, String phoneNumber) {
+    public UserInfo(String userName, String userPassword, String phoneNumber) {
         this.userName = userName;
-        this.userPassword = password;
-        this.usertele = phoneNumber;
+        this.userPassword = userPassword;
+        this.phoneNumber = phoneNumber;
     }
     int userId;
     String userName;
     String userPassword;
-    String usertele;
+    String phoneNumber;
     String avatarUrl;
 }

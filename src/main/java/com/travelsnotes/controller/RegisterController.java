@@ -2,7 +2,6 @@ package com.travelsnotes.controller;
 
 
 import com.travelsnotes.pojo.UserInfo;
-import com.travelsnotes.pojo.UserInfo;
 import com.travelsnotes.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

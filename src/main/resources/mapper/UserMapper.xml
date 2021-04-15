@@ -13,7 +13,7 @@
         select * from travels_notes.notes_user where usertele=#{phoneNumber};
     </select>
     <insert id="registerUser"  parameterType="UserInfo"  useGeneratedKeys="true" keyProperty="userId">
-        insert into travels_notes.notes_user(userId,userName,userPassword,usertele) values(null,#{userName},#{password},#{phoneNumber})
+        insert into travels_notes.notes_user(userId,userName,userPassword,usertele) values(null,#{userName},#{userPassword},#{phoneNumber})
     </insert>
     <update id="updateUser" parameterType="UserInfo">
         update travels_notes.notes_user set userName=#{userName} where;

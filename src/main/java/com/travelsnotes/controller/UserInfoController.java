@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class UserInfoController {
@@ -24,12 +26,13 @@ public class UserInfoController {
 
     //设置用户信息
     @PostMapping("/updateInfo")
-    public String setUserInfo(@RequestParam(value = "token") String token,
+    public Map<String, String> setUserInfo(@RequestParam(value = "token") String token,
                               @RequestParam(value = "userName")String userName,
-                              @RequestParam(value = "phoneNumber") String phoneNumber,
-                              @RequestParam(value = "avatar")String avatarUrl,
+                              @RequestParam(value = "phoneNumber",required = false) String phoneNumber,
+                              @RequestParam(value = "avatar",required = false)String avatarUrl,
                                 HttpServletRequest request){
         Object attribute = request.getSession().getAttribute(token);
+        Map<String, String> map = new HashMap<>();
         if (attribute == null) {
             return null;
         }
@@ -39,9 +42,11 @@ public class UserInfoController {
             userProperties.setPhoneNumber(userName, tempId);
             userProperties.setAvatar(avatarUrl, tempId);
         }catch(Exception e){
-            return "Catch Exception";
+            map.put("status", "400");
+            return map;
         }
-        return "Result";
+        map.put("status", "200");
+        return map;
     }
 
     //设置用户头像URL
