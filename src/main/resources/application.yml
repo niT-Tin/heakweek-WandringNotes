@@ -9,10 +9,10 @@ spring:
     cache: false
   datasource:
     username: "root"
-    password: ""
+    password: "022015"
     url: jdbc:mysql://localhost:3306/travels_notes?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    type: com.alibaba.druid.pool.DruidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
 
     initialSize: 5
     minIdle: 5
@@ -34,10 +34,10 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.travelsnotes.pojo
 oss:
-  endpoint: ""
-  keyid: ""
-  keysecret: ""
-  bucketname: ""
-  filehost: ""
-  headPicbucket: ""
-  fileheadhost: ""
+  endpoint: "https://oss-cn-beijing.aliyuncs.com"
+  keyid: "LTAI5tHHErCYNKBYZ5Sh8bZV"
+  keysecret: "hcDMsewyKeKqV2Nh2R5Ofieua7Lf0T"
+  bucketname: "hk4top"
+  filehost: "https://hk4top.oss-cn-beijing.aliyuncs.com/"
+  headPicbucket: "hk4topavatar"
+  fileheadhost: "https://hk4topavatar.oss-cn-beijing.aliyuncs.com/"

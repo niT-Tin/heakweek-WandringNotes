@@ -3,13 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.travelsnotes.dao.UserMapper">
-    <select id="queryById"  resultType="UserInfo">
+
+    <resultMap id="userMap" type="UserInfo">
+        <id  column="userId" property="userId"></id>
+        <result column="userName" property="userName"></result>
+        <result column="userPassword" property="password"></result>
+        <result column="usertele" property="phoneNumber"></result>
+        <result column="avatarUrl" property="avatarUrl"></result>
+    </resultMap>
+
+    <select id="queryById"  resultMap="userMap">
         select * from travels_notes.notes_user where userId=#{id};
     </select>
-    <select id="queryByName" parameterType="String" resultType="UserInfo">
+    <select id="queryByName" parameterType="String" resultMap="userMap">
         select * from travels_notes.notes_user where userName=#{name};
     </select>
-    <select id="queryByTele" parameterType="String" resultType="UserInfo">
+    <select id="queryByTele" parameterType="String" resultMap="userMap">
         select * from travels_notes.notes_user where usertele=#{phoneNumber};
     </select>
     <insert id="registerUser"  parameterType="UserInfo"  useGeneratedKeys="true" keyProperty="userId">

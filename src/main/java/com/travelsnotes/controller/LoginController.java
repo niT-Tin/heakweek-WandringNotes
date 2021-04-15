@@ -1,6 +1,8 @@
 package com.travelsnotes.controller;
 
 
+import com.travelsnotes.pojo.Result;
+import com.travelsnotes.pojo.ResultCodeEnum;
 import com.travelsnotes.pojo.UserInfo;
 import com.travelsnotes.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,26 +29,25 @@ public class LoginController {
 
     // 登录
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public Map<String, String> Login(@RequestParam(value = "userName") String userName,
-                                     @RequestParam(value = "userPassword")String password, HttpServletRequest request){
+    public Result Login(@RequestParam(value = "userName") String userName,
+                                     @RequestParam(value = "password")String password, HttpServletRequest request){
         try {
             UserInfo user = userService.queryByName(userName);
-//            System.out.println(user);
-            Map<String, String> map = new HashMap<>();
-            if (user != null && user.getUserPassword().equals(password)) {
-                String token = UUID.randomUUID().toString();
+            Map<String, Object> map = new HashMap<>();
+            if (user != null ){
+                if (user.getPassword().equals(password)){
+                String token = UUID.randomUUID().toString().replaceAll("-","").toUpperCase();
                 request.getSession().setAttribute(token, user.getUserId());
                 map.put("token", token);
-                map.put("status", "200");
-                return map;
-            } else {
-                map.put("status", "400");
-                return map;
+                return Result.ok(ResultCodeEnum.SUCCESS_LOGIN).data(map);   //返回登陆成功 token
+                } else {
+                return  Result.error(ResultCodeEnum.ERROR_PASSWORD);    //密码错误
+                }
+            }else {
+               return Result.error(ResultCodeEnum.ERROR_NOT_EXISTS_USER);   //用户名不存在
             }
         }catch (Exception e){
-            Map<String, String> map = new HashMap<>();
-            map.put("status", "400");
-            return map;
+            return Result.error(ResultCodeEnum.PARAM_ERROR);    //参数不正确
         }
     }
 }

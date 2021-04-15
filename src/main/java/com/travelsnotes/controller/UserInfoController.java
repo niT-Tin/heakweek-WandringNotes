@@ -26,8 +26,8 @@ public class UserInfoController {
     @PostMapping("/updateInfo")
     public String setUserInfo(@RequestParam(value = "token") String token,
                               @RequestParam(value = "userName")String userName,
-                              @RequestParam(value = "phoneNumber") String phoneNumber,
-                              @RequestParam(value = "avatar")String avatarUrl,
+                              @RequestParam(value = "phoneNumber",required = false) String phoneNumber,
+                              @RequestParam(value = "avatar",required = false)String avatarUrl,
                                 HttpServletRequest request){
         Object attribute = request.getSession().getAttribute(token);
         if (attribute == null) {

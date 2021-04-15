@@ -1,6 +1,8 @@
 package com.travelsnotes.controller;
 
 
+import com.travelsnotes.pojo.Result;
+import com.travelsnotes.pojo.ResultCodeEnum;
 import com.travelsnotes.pojo.UserInfo;
 import com.travelsnotes.pojo.UserInfo;
 import com.travelsnotes.service.UserService;
@@ -16,36 +18,28 @@ public class RegisterController {
     @Autowired
     UserService userService;
     @RequestMapping(value = "/isHas",method = RequestMethod.GET)
-    public Map<String, Integer> isHas(@RequestParam(value = "userName") String username){
-        Map<String,Integer> map=new HashMap<>();
+    public Result isHas(@RequestParam(value = "userName") String username){
         try {
             UserInfo user = userService.queryByName(username);
             if (user != null) {
-                map.put("status",404);
-                return map;
+               return Result.error(ResultCodeEnum.ERROR_NOT_EXISTS_USER);   //返回用户已存在
             } else {
-                map.put("status",200);
-                return map;
+                return Result.ok(ResultCodeEnum.SUCCESS_USABLE); //返回可以使用该用户名
             }
         }catch (Exception e){
-            map.put("status",404);
-            return map;
+            return Result.error(ResultCodeEnum.PARAM_ERROR);
         }
     }
     @RequestMapping(value = "/account",method = RequestMethod.POST)
-    public Map<String, Integer> register(String userName,String password,String phoneNumber){
+    public Result register(String userName,String password,String phoneNumber){
         Map<String, Integer> map=new HashMap<>();
         int result=0;
         try{
             UserInfo userInfo=new UserInfo(userName,password,phoneNumber);
             result=userService.registerUser(userInfo);
+            return Result.ok(ResultCodeEnum.SUCCESS_REGISTER); //注册成功
         }catch (Exception e){
-            result=-1;
+            return    Result.error(ResultCodeEnum.FAIL_REGISTER);  //注册失败
         }
-        if (result==1)
-        map.put("status",200);
-        if (result==-1)
-            map.put("status",400);
-        return map;
     }
 }

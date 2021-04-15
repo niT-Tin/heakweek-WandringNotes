@@ -5,7 +5,7 @@
 <mapper namespace="com.travelsnotes.dao.HKMapper">
 
     <select id="getPicText" parameterType="int" resultType="String">
-        select pic_text from travels_notes.pics where id=#{id}
+        select pic_text from travels_notes.pics where userId=#{id}
     </select>
 
     <select id="setUsername" parameterType="String" resultType="String">
