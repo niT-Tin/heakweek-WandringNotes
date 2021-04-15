@@ -3,6 +3,7 @@ package com.travelsnotes.controller;
 
 import com.travelsnotes.dao.HKMapper;
 import com.travelsnotes.pojo.UserActive;
+import com.travelsnotes.service.OSSutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,9 @@ public class ActiveController {
 
     @Autowired
     private HKMapper userActiveProperties;
+
+    @Autowired
+    private OSSutil ossProperties;
 
     private UserActive userActive;
 
@@ -33,6 +37,7 @@ public class ActiveController {
             userActive.setActiveDays(userActiveProperties.getActiveDays(tempId));
             userActive.setUserName(userActiveProperties.getUsername(tempId));
             userActive.setTxtNum(userActiveProperties.getTxtNum(tempId));
+            userActive.setAvatarurl(ossProperties.getAvatar(tempId));
         } catch (Exception e) {
             return null;
         }
