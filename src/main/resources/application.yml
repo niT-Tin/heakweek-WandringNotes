@@ -2,15 +2,25 @@ server:
   port: 8080
 
 
+file:
+  staticAccessPath: /api/file/**  #映射路径
+  #文件上传目录（注意Linux和Windows上的目录结构不同）
+  #file.uploadFolder=/root/uploadFiles/
+  uploadFolder: /root/hk4/uploadFiles/   #本地路径
+  fileUrl: http://47.102.220.227:8080/api/file/
 spring:
   application:
   name: springboot-test-exam1
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB #设置文件上传大小限制
   thymeleaf:
     cache: false
   datasource:
     username: "root"
-    password: "Congratulat325ol"
-    url: jdbc:mysql://localhost:3306/travels_notes?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=utf8
+    password: "123456"
+    url: jdbc:mysql://localhost:3308/travels_notes?serverTimezone=UTC&useUnicode=true&useSSL=false&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
@@ -41,3 +51,6 @@ oss:
   filehost: "https://hk4top.oss-cn-beijing.aliyuncs.com/"
   headPicbucket: "hk4topavatar"
   fileheadhost: "https://hk4topavatar.oss-cn-beijing.aliyuncs.com/"
+logging:
+  file:
+    path: /logs/hk4.log

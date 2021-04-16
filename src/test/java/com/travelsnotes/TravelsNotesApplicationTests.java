@@ -22,7 +22,7 @@ class TravelsNotesApplicationTests {
     @Test
     void contextLoads() {
       //  userService.registerUser("zeng","12345","12345678900");
-        userService.registerUser(new UserInfo("ro","12345","12345678900"));
+        //userService.registerUser(new UserInfo("roii","12345","12345678900"));
         System.out.println(userService.queryById(611211));
         System.out.println(userService.queryByName("root"));
         UserInfo uu=new UserInfo();

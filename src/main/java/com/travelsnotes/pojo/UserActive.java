@@ -12,5 +12,4 @@ public class UserActive {
     private String userName;
     private int ActiveDays;
     private int txtNum;
-    private String avatarurl;
 }
